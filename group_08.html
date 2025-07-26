@@ -1,156 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>📘 المجموعة 8</title>
-  <style>
-    body { font-family: sans-serif; text-align: center; background-color: #e0f7fa; padding: 20px; }
-    h1 { color: #01579b; }
-    h2 { font-size: 36px; color: #01579b; }
-    h3 { font-size: 28px; color: #00796b; }
-    .slide { margin-bottom: 30px; }
-    button { font-size: 20px; padding: 10px 20px; margin-top: 10px; background-color: #0288d1; color: white; border: none; border-radius: 10px; }
-    input[type=range] { width: 80%; }
-    a { color: #00796b; }
-  </style>
-</head>
-<body>
-  <h1>📘 المجموعة 8</h1>
-  
-        <div class="slide" id="slide0" style="display: block;">
-            <h2>stop</h2>
-            <h3>يتوقف</h3>
-            <button onclick="playAudio('stop')">🔊 نطق الكلمة</button><br><br>
-            <label>🎚️ درجة الصوت</label><br>
-            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1"><br>
-            <label>⚡ سرعة النطق</label><br>
-            <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
-            <audio id="audio_stop" src="https://dict.youdao.com/dictvoice?audio=stop" preload="auto"></audio>
-        </div>
-        
-        <div class="slide" id="slide1" style="display: none;">
-            <h2>study</h2>
-            <h3>يَدرس</h3>
-            <button onclick="playAudio('study')">🔊 نطق الكلمة</button><br><br>
-            <label>🎚️ درجة الصوت</label><br>
-            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1"><br>
-            <label>⚡ سرعة النطق</label><br>
-            <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
-            <audio id="audio_study" src="https://dict.youdao.com/dictvoice?audio=study" preload="auto"></audio>
-        </div>
-        
-        <div class="slide" id="slide2" style="display: none;">
-            <h2>talk</h2>
-            <h3>يتحدث</h3>
-            <button onclick="playAudio('talk')">🔊 نطق الكلمة</button><br><br>
-            <label>🎚️ درجة الصوت</label><br>
-            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1"><br>
-            <label>⚡ سرعة النطق</label><br>
-            <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
-            <audio id="audio_talk" src="https://dict.youdao.com/dictvoice?audio=talk" preload="auto"></audio>
-        </div>
-        
-        <div class="slide" id="slide3" style="display: none;">
-            <h2>thank</h2>
-            <h3>يشكر</h3>
-            <button onclick="playAudio('thank')">🔊 نطق الكلمة</button><br><br>
-            <label>🎚️ درجة الصوت</label><br>
-            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1"><br>
-            <label>⚡ سرعة النطق</label><br>
-            <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
-            <audio id="audio_thank" src="https://dict.youdao.com/dictvoice?audio=thank" preload="auto"></audio>
-        </div>
-        
-        <div class="slide" id="slide4" style="display: none;">
-            <h2>touch</h2>
-            <h3>يلمس</h3>
-            <button onclick="playAudio('touch')">🔊 نطق الكلمة</button><br><br>
-            <label>🎚️ درجة الصوت</label><br>
-            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1"><br>
-            <label>⚡ سرعة النطق</label><br>
-            <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
-            <audio id="audio_touch" src="https://dict.youdao.com/dictvoice?audio=touch" preload="auto"></audio>
-        </div>
-        
-        <div class="slide" id="slide5" style="display: none;">
-            <h2>travel</h2>
-            <h3>يسافر</h3>
-            <button onclick="playAudio('travel')">🔊 نطق الكلمة</button><br><br>
-            <label>🎚️ درجة الصوت</label><br>
-            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1"><br>
-            <label>⚡ سرعة النطق</label><br>
-            <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
-            <audio id="audio_travel" src="https://dict.youdao.com/dictvoice?audio=travel" preload="auto"></audio>
-        </div>
-        
-        <div class="slide" id="slide6" style="display: none;">
-            <h2>try</h2>
-            <h3>يُحاول</h3>
-            <button onclick="playAudio('try')">🔊 نطق الكلمة</button><br><br>
-            <label>🎚️ درجة الصوت</label><br>
-            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1"><br>
-            <label>⚡ سرعة النطق</label><br>
-            <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
-            <audio id="audio_try" src="https://dict.youdao.com/dictvoice?audio=try" preload="auto"></audio>
-        </div>
-        
-        <div class="slide" id="slide7" style="display: none;">
-            <h2>turn</h2>
-            <h3>يُدير</h3>
-            <button onclick="playAudio('turn')">🔊 نطق الكلمة</button><br><br>
-            <label>🎚️ درجة الصوت</label><br>
-            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1"><br>
-            <label>⚡ سرعة النطق</label><br>
-            <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
-            <audio id="audio_turn" src="https://dict.youdao.com/dictvoice?audio=turn" preload="auto"></audio>
-        </div>
-        
-        <div class="slide" id="slide8" style="display: none;">
-            <h2>type</h2>
-            <h3>يكتب</h3>
-            <button onclick="playAudio('type')">🔊 نطق الكلمة</button><br><br>
-            <label>🎚️ درجة الصوت</label><br>
-            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1"><br>
-            <label>⚡ سرعة النطق</label><br>
-            <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
-            <audio id="audio_type" src="https://dict.youdao.com/dictvoice?audio=type" preload="auto"></audio>
-        </div>
-        
-        <div class="slide" id="slide9" style="display: none;">
-            <h2>use</h2>
-            <h3>يستخدم</h3>
-            <button onclick="playAudio('use')">🔊 نطق الكلمة</button><br><br>
-            <label>🎚️ درجة الصوت</label><br>
-            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1"><br>
-            <label>⚡ سرعة النطق</label><br>
-            <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
-            <audio id="audio_use" src="https://dict.youdao.com/dictvoice?audio=use" preload="auto"></audio>
-        </div>
-        
-  <br>
-  <button onclick="prevSlide()">⬅️ السابق</button>
-  <button onclick="nextSlide()">➡️ التالي</button>
-  <br><br>
-  <a href="index.html">🏠 العودة للرئيسية</a>
-<script>
-  let current = 0;
-  const total = 10;
-  function showSlide(i) {
-    for (let j = 0; j < total; j++) {
-      document.getElementById("slide" + j).style.display = "none";
-    }
-    document.getElementById("slide" + i).style.display = "block";
-    current = i;
-  }
-  function nextSlide() { showSlide((current + 1) % total); }
-  function prevSlide() { showSlide((current - 1 + total) % total); }
-  function playAudio(verb) {
-    const audio = document.getElementById("audio_" + verb);
-    audio.volume = parseFloat(document.getElementById("volumeSlider").value);
-    audio.playbackRate = parseFloat(document.getElementById("speedSlider").value);
-    audio.play();
-  }
-</script>
-</body>
-</html>
