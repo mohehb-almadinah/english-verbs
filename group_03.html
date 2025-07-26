@@ -1,0 +1,174 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>Verb Group 3</title>
+      <style>
+        body { background-color: #add8e6; font-family: Arial, sans-serif; text-align: center; padding-top: 20px; }
+        .word { font-size: 60px; font-weight: bold; color: #000; }
+        .translation { font-size: 50px; color: #000; margin-bottom: 30px; }
+        .audio-button, input[type=range], select { margin-top: 10px; font-size: 18px; }
+        .audio-button { padding: 10px 20px; background-color: #005eb8; color: white; border: none; border-radius: 10px; cursor: pointer; }
+        .label { font-size: 16px; margin-top: 20px; color: #333; }
+        .nav-buttons { margin-top: 30px; }
+        .nav-button { font-size: 22px; padding: 10px 20px; margin: 0 20px; cursor: pointer; }
+        .dropdown-container { margin-top: 20px; }
+      </style>
+    </head>
+    <body>
+    <div class="dropdown-container">
+      <label for="verbSelect">🔽 اختر فعل:</label>
+      <select id="verbSelect" onchange="goToSlide(this.value)">
+        <option value="0">listen - يستمع</option><option value="1">live - يعيش</option><option value="2">look - ينظر</option><option value="3">love - يعشق</option><option value="4">move - يتحرك</option><option value="5">need - يحتاج</option><option value="6">open - يفتح</option><option value="7">paint - يلون</option><option value="8">plan - يخطط</option><option value="9">play - يلعب</option>
+      </select>
+    </div>
+    
+        <div class="slide" id="slide0" style="display: block;">
+          <div class="word">listen</div>
+          <div class="translation">يستمع</div>
+          <button class="audio-button" onclick="playAudio('listen')">🔊 نطق الكلمة</button>
+          <div class="label">🎚️ درجة الصوت</div>
+          <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+          <div class="label">⚡ سرعة النطق</div>
+          <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
+          <audio id="audio_listen" src="https://dict.youdao.com/dictvoice?audio=listen" preload="auto"></audio>
+        </div>
+        
+        <div class="slide" id="slide1" style="display: none;">
+          <div class="word">live</div>
+          <div class="translation">يعيش</div>
+          <button class="audio-button" onclick="playAudio('live')">🔊 نطق الكلمة</button>
+          <div class="label">🎚️ درجة الصوت</div>
+          <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+          <div class="label">⚡ سرعة النطق</div>
+          <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
+          <audio id="audio_live" src="https://dict.youdao.com/dictvoice?audio=live" preload="auto"></audio>
+        </div>
+        
+        <div class="slide" id="slide2" style="display: none;">
+          <div class="word">look</div>
+          <div class="translation">ينظر</div>
+          <button class="audio-button" onclick="playAudio('look')">🔊 نطق الكلمة</button>
+          <div class="label">🎚️ درجة الصوت</div>
+          <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+          <div class="label">⚡ سرعة النطق</div>
+          <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
+          <audio id="audio_look" src="https://dict.youdao.com/dictvoice?audio=look" preload="auto"></audio>
+        </div>
+        
+        <div class="slide" id="slide3" style="display: none;">
+          <div class="word">love</div>
+          <div class="translation">يعشق</div>
+          <button class="audio-button" onclick="playAudio('love')">🔊 نطق الكلمة</button>
+          <div class="label">🎚️ درجة الصوت</div>
+          <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+          <div class="label">⚡ سرعة النطق</div>
+          <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
+          <audio id="audio_love" src="https://dict.youdao.com/dictvoice?audio=love" preload="auto"></audio>
+        </div>
+        
+        <div class="slide" id="slide4" style="display: none;">
+          <div class="word">move</div>
+          <div class="translation">يتحرك</div>
+          <button class="audio-button" onclick="playAudio('move')">🔊 نطق الكلمة</button>
+          <div class="label">🎚️ درجة الصوت</div>
+          <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+          <div class="label">⚡ سرعة النطق</div>
+          <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
+          <audio id="audio_move" src="https://dict.youdao.com/dictvoice?audio=move" preload="auto"></audio>
+        </div>
+        
+        <div class="slide" id="slide5" style="display: none;">
+          <div class="word">need</div>
+          <div class="translation">يحتاج</div>
+          <button class="audio-button" onclick="playAudio('need')">🔊 نطق الكلمة</button>
+          <div class="label">🎚️ درجة الصوت</div>
+          <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+          <div class="label">⚡ سرعة النطق</div>
+          <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
+          <audio id="audio_need" src="https://dict.youdao.com/dictvoice?audio=need" preload="auto"></audio>
+        </div>
+        
+        <div class="slide" id="slide6" style="display: none;">
+          <div class="word">open</div>
+          <div class="translation">يفتح</div>
+          <button class="audio-button" onclick="playAudio('open')">🔊 نطق الكلمة</button>
+          <div class="label">🎚️ درجة الصوت</div>
+          <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+          <div class="label">⚡ سرعة النطق</div>
+          <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
+          <audio id="audio_open" src="https://dict.youdao.com/dictvoice?audio=open" preload="auto"></audio>
+        </div>
+        
+        <div class="slide" id="slide7" style="display: none;">
+          <div class="word">paint</div>
+          <div class="translation">يلون</div>
+          <button class="audio-button" onclick="playAudio('paint')">🔊 نطق الكلمة</button>
+          <div class="label">🎚️ درجة الصوت</div>
+          <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+          <div class="label">⚡ سرعة النطق</div>
+          <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
+          <audio id="audio_paint" src="https://dict.youdao.com/dictvoice?audio=paint" preload="auto"></audio>
+        </div>
+        
+        <div class="slide" id="slide8" style="display: none;">
+          <div class="word">plan</div>
+          <div class="translation">يخطط</div>
+          <button class="audio-button" onclick="playAudio('plan')">🔊 نطق الكلمة</button>
+          <div class="label">🎚️ درجة الصوت</div>
+          <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+          <div class="label">⚡ سرعة النطق</div>
+          <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
+          <audio id="audio_plan" src="https://dict.youdao.com/dictvoice?audio=plan" preload="auto"></audio>
+        </div>
+        
+        <div class="slide" id="slide9" style="display: none;">
+          <div class="word">play</div>
+          <div class="translation">يلعب</div>
+          <button class="audio-button" onclick="playAudio('play')">🔊 نطق الكلمة</button>
+          <div class="label">🎚️ درجة الصوت</div>
+          <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+          <div class="label">⚡ سرعة النطق</div>
+          <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
+          <audio id="audio_play" src="https://dict.youdao.com/dictvoice?audio=play" preload="auto"></audio>
+        </div>
+        
+    <div class="nav-buttons">
+      <button class="nav-button" onclick="prevSlide()">⬅️ السابق</button>
+      <button class="nav-button" onclick="nextSlide()">➡️ التالي</button>
+    </div>
+    <script>
+      let currentSlide = 0;
+      const totalSlides = 10;
+      function showSlide(index) {
+        for (let i = 0; i < totalSlides; i++) {
+          document.getElementById('slide' + i).style.display = 'none';
+        }
+        document.getElementById('slide' + index).style.display = 'block';
+        document.getElementById('verbSelect').value = index;
+        currentSlide = index;
+      }
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        showSlide(currentSlide);
+      }
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        showSlide(currentSlide);
+      }
+      function goToSlide(index) {
+        showSlide(parseInt(index));
+      }
+      function playAudio(verb) {
+        const audio = document.getElementById('audio_' + verb);
+        const volume = document.getElementById('volumeSlider').value;
+        const speed = document.getElementById('speedSlider').value;
+        audio.volume = parseFloat(volume);
+        audio.playbackRate = parseFloat(speed);
+        audio.play();
+      }
+    </script>
+    </body>
+    </html>
+    
