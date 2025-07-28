@@ -1,162 +1,0 @@
-
-<!DOCTYPE html>
-
-<html lang="ar">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>📘 المجموعة 1</title>
-<style>
-    body { font-family: sans-serif; text-align: center; background-color: #e0f7fa; padding: 20px; }
-    h1 { color: #01579b; }
-    h2 { font-size: 36px; color: #01579b; }
-    h3 { font-size: 28px; color: #00796b; }
-    .slide { margin-bottom: 30px; }
-    button { font-size: 20px; padding: 10px 20px; margin-top: 10px; background-color: #0288d1; color: white; border: none; border-radius: 10px; }
-    input[type=range] { width: 80%; }
-    a { color: #00796b; }
-  </style>
-</head>
-<body>
-<h1>📘 المجموعة الأولى</h1>
-<!-- الشرائح الجديدة بناءً على ملف الأفعال -->
-<div class="slide" id="slide0" style="display: block;">
-<h2>answer</h2>
-<h3>يجيب</h3>
-<br/><br/>
-<button onclick="playAudio('answer', 1)">🎧 نطق عادي</button><br/>
-<button onclick="playAudio('answer', 0.67)">🐢 نطق متوسط</button><br/>
-<button onclick="playAudio('answer', 0.34)">🐌 نطق بطيء</button>
-<audio id="audio_answer" preload="auto" src="audio/answer.mp3"></audio>
-<br/><br/>
-<button onclick="nextSlide()">➡️ التالي</button>
-</div>
-<div class="slide" id="slide1" style="display: none;">
-<h2>argue</h2>
-<h3>يتشاجر</h3>
-<br/><br/>
-<button onclick="playAudio('argue', 1)">🎧 نطق عادي</button><br/>
-<button onclick="playAudio('argue', 0.67)">🐢 نطق متوسط</button><br/>
-<button onclick="playAudio('argue', 0.34)">🐌 نطق بطيء</button>
-<audio id="audio_argue" preload="auto" src="audio/argue.mp3"></audio>
-<br/><br/>
-<button onclick="prevSlide()">⬅️ السابق</button>
-<button onclick="nextSlide()">➡️ التالي</button>
-</div>
-<div class="slide" id="slide2" style="display: none;">
-<h2>agree</h2>
-<h3>يوافق</h3>
-<br/><br/>
-<button onclick="playAudio('agree', 1)">🎧 نطق عادي</button><br/>
-<button onclick="playAudio('agree', 0.67)">🐢 نطق متوسط</button><br/>
-<button onclick="playAudio('agree', 0.34)">🐌 نطق بطيء</button>
-<audio id="audio_agree" preload="auto" src="audio/agree.mp3"></audio>
-<br/><br/>
-<button onclick="prevSlide()">⬅️ السابق</button>
-<button onclick="nextSlide()">➡️ التالي</button>
-</div>
-<div class="slide" id="slide3" style="display: none;">
-<h2>ask</h2>
-<h3>يسأل</h3>
-<br/><br/>
-<button onclick="playAudio('ask', 1)">🎧 نطق عادي</button><br/>
-<button onclick="playAudio('ask', 0.67)">🐢 نطق متوسط</button><br/>
-<button onclick="playAudio('ask', 0.34)">🐌 نطق بطيء</button>
-<audio id="audio_ask" preload="auto" src="audio/ask.mp3"></audio>
-<br/><br/>
-<button onclick="prevSlide()">⬅️ السابق</button>
-<button onclick="nextSlide()">➡️ التالي</button>
-</div>
-<div class="slide" id="slide4" style="display: none;">
-<h2>arrive</h2>
-<h3>يصل</h3>
-<br/><br/>
-<button onclick="playAudio('arrive', 1)">🎧 نطق عادي</button><br/>
-<button onclick="playAudio('arrive', 0.67)">🐢 نطق متوسط</button><br/>
-<button onclick="playAudio('arrive', 0.34)">🐌 نطق بطيء</button>
-<audio id="audio_arrive" preload="auto" src="audio/arrive.mp3"></audio>
-<br/><br/>
-<button onclick="prevSlide()">⬅️ السابق</button>
-<button onclick="nextSlide()">➡️ التالي</button>
-</div>
-<div class="slide" id="slide5" style="display: none;">
-<h2>call</h2>
-<h3>يتصل</h3>
-<br/><br/>
-<button onclick="playAudio('call', 1)">🎧 نطق عادي</button><br/>
-<button onclick="playAudio('call', 0.67)">🐢 نطق متوسط</button><br/>
-<button onclick="playAudio('call', 0.34)">🐌 نطق بطيء</button>
-<audio id="audio_call" preload="auto" src="audio/call.mp3"></audio>
-<br/><br/>
-<button onclick="prevSlide()">⬅️ السابق</button>
-<button onclick="nextSlide()">➡️ التالي</button>
-</div>
-<div class="slide" id="slide6" style="display: none;">
-<h2>clean</h2>
-<h3>ينظف</h3>
-<br/><br/>
-<button onclick="playAudio('clean', 1)">🎧 نطق عادي</button><br/>
-<button onclick="playAudio('clean', 0.67)">🐢 نطق متوسط</button><br/>
-<button onclick="playAudio('clean', 0.34)">🐌 نطق بطيء</button>
-<audio id="audio_clean" preload="auto" src="audio/clean.mp3"></audio>
-<br/><br/>
-<button onclick="prevSlide()">⬅️ السابق</button>
-<button onclick="nextSlide()">➡️ التالي</button>
-</div>
-<div class="slide" id="slide7" style="display: none;">
-<h2>climb</h2>
-<h3>يتسلق</h3>
-<br/><br/>
-<button onclick="playAudio('climb', 1)">🎧 نطق عادي</button><br/>
-<button onclick="playAudio('climb', 0.67)">🐢 نطق متوسط</button><br/>
-<button onclick="playAudio('climb', 0.34)">🐌 نطق بطيء</button>
-<audio id="audio_climb" preload="auto" src="audio/climb.mp3"></audio>
-<br/><br/>
-<button onclick="prevSlide()">⬅️ السابق</button>
-<button onclick="nextSlide()">➡️ التالي</button>
-</div>
-<div class="slide" id="slide8" style="display: none;">
-<h2>close</h2>
-<h3>يغلق</h3>
-<br/><br/>
-<button onclick="playAudio('close', 1)">🎧 نطق عادي</button><br/>
-<button onclick="playAudio('close', 0.67)">🐢 نطق متوسط</button><br/>
-<button onclick="playAudio('close', 0.34)">🐌 نطق بطيء</button>
-<audio id="audio_close" preload="auto" src="audio/close.mp3"></audio>
-<br/><br/>
-<button onclick="prevSlide()">⬅️ السابق</button>
-<button onclick="nextSlide()">➡️ التالي</button>
-</div>
-<div class="slide" id="slide9" style="display: none;">
-<h2>cook</h2>
-<h3>يطبخ</h3>
-<br/><br/>
-<button onclick="playAudio('cook', 1)">🎧 نطق عادي</button><br/>
-<button onclick="playAudio('cook', 0.67)">🐢 نطق متوسط</button><br/>
-<button onclick="playAudio('cook', 0.34)">🐌 نطق بطيء</button>
-<audio id="audio_cook" preload="auto" src="audio/cook.mp3"></audio>
-<br/><br/>
-<button onclick="prevSlide()">⬅️ السابق</button>
-</div>
-<button onclick="location.href='index.html'">🏠 الرجوع إلى الصفحة الرئيسية</button><script>
-  let current = 0;
-  const total = 10;
-  function showSlide(i) {
-    for (let j = 0; j < total; j++) {
-      document.getElementById("slide" + j).style.display = "none";
-    }
-    document.getElementById("slide" + i).style.display = "block";
-    current = i;
-  }
-  function nextSlide() { showSlide((current + 1) % total); }
-  function prevSlide() { showSlide((current - 1 + total) % total); }
-  
-    function playAudio(verb, rate) {
-      const audio = document.getElementById("audio_" + verb);
-      audio.playbackRate = rate;
-      audio.play();
-    }
-    
-</script>
-</body>
-</html>
