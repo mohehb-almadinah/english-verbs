@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>📘 المجموعة 3</title>
+<style>
+    body { font-family: sans-serif; text-align: center; background-color: #e0f7fa; padding: 20px; }
+    h1 { color: #01579b; }
+    h2 { font-size: 36px; color: #01579b; }
+    h3 { font-size: 28px; color: #00796b; }
+    .slide { margin-bottom: 30px; }
+    button { font-size: 20px; padding: 10px 20px; margin-top: 10px; background-color: #0288d1; color: white; border: none; border-radius: 10px; }
+    input[type=range] { width: 80%; }
+    a { color: #00796b; }
+    .word-box {
+        background-color: #b2ebf2;
+        padding: 20px;
+        border-radius: 15px;
+        margin: 15px auto;
+        max-width: 300px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border: 2px solid #0097a7;
+    }
+    .word-box h2 { margin: 0; font-size: 36px; color: #004d40; }
+    .word-box h3 { margin-top: 10px; font-size: 28px; color: #00695c; }
+    body.dark-mode .word-box {
+        background-color: #263238;
+        border: 2px solid #4dd0e1;
+    }
+    body.dark-mode .word-box h2,
+    body.dark-mode .word-box h3 { color: #e0f7fa; }
+</style>
+<style id="dark-mode-style"></style>
+</head>
+<body>
+
+<div style="display: flex; justify-content: center; align-items: center; gap: 40px;">
+<h1 style="margin: 0;">📘 المجموعة الثالثة</h1>
+<button onclick="toggleDarkMode()" style="padding: 8px 14px; border-radius: 10px; background-color: #0288d1; color: white; border: none; font-size: 16px;">🌓</button>
+</div>
+
+
+    <div class="slide" id="slide0" style="display: block;">
+        <div class="word-box"><h2>listen</h2><h3>يستمع</h3></div>
+        <button onclick="playAudio('listen', 1)">🎧 نطق عادي</button><br/>
+        <button onclick="playAudio('listen', 0.67)">🐢 نطق متوسط</button><br/>
+        <button onclick="playAudio('listen', 0.34)">🐌 نطق بطيء</button>
+        <audio id="audio_listen" preload="auto" src="audio_3/listen.mp3"></audio><br/><br/>
+        <button onclick="nextSlide()">➡️ التالي</button>
+    </div>
+    
+    <div class="slide" id="slide1" style="display: none;">
+        <div class="word-box"><h2>live</h2><h3>يعيش</h3></div>
+        <button onclick="playAudio('live', 1)">🎧 نطق عادي</button><br/>
+        <button onclick="playAudio('live', 0.67)">🐢 نطق متوسط</button><br/>
+        <button onclick="playAudio('live', 0.34)">🐌 نطق بطيء</button>
+        <audio id="audio_live" preload="auto" src="audio_3/live.mp3"></audio><br/><br/>
+        <button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button>
+    </div>
+    
+    <div class="slide" id="slide2" style="display: none;">
+        <div class="word-box"><h2>look</h2><h3>ينظر</h3></div>
+        <button onclick="playAudio('look', 1)">🎧 نطق عادي</button><br/>
+        <button onclick="playAudio('look', 0.67)">🐢 نطق متوسط</button><br/>
+        <button onclick="playAudio('look', 0.34)">🐌 نطق بطيء</button>
+        <audio id="audio_look" preload="auto" src="audio_3/look.mp3"></audio><br/><br/>
+        <button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button>
+    </div>
+    
+    <div class="slide" id="slide3" style="display: none;">
+        <div class="word-box"><h2>love</h2><h3>يعشق</h3></div>
+        <button onclick="playAudio('love', 1)">🎧 نطق عادي</button><br/>
+        <button onclick="playAudio('love', 0.67)">🐢 نطق متوسط</button><br/>
+        <button onclick="playAudio('love', 0.34)">🐌 نطق بطيء</button>
+        <audio id="audio_love" preload="auto" src="audio_3/love.mp3"></audio><br/><br/>
+        <button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button>
+    </div>
+    
+    <div class="slide" id="slide4" style="display: none;">
+        <div class="word-box"><h2>move</h2><h3>يتحرك</h3></div>
+        <button onclick="playAudio('move', 1)">🎧 نطق عادي</button><br/>
+        <button onclick="playAudio('move', 0.67)">🐢 نطق متوسط</button><br/>
+        <button onclick="playAudio('move', 0.34)">🐌 نطق بطيء</button>
+        <audio id="audio_move" preload="auto" src="audio_3/move.mp3"></audio><br/><br/>
+        <button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button>
+    </div>
+    
+    <div class="slide" id="slide5" style="display: none;">
+        <div class="word-box"><h2>need</h2><h3>يحتاج</h3></div>
+        <button onclick="playAudio('need', 1)">🎧 نطق عادي</button><br/>
+        <button onclick="playAudio('need', 0.67)">🐢 نطق متوسط</button><br/>
+        <button onclick="playAudio('need', 0.34)">🐌 نطق بطيء</button>
+        <audio id="audio_need" preload="auto" src="audio_3/need.mp3"></audio><br/><br/>
+        <button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button>
+    </div>
+    
+    <div class="slide" id="slide6" style="display: none;">
+        <div class="word-box"><h2>open</h2><h3>يفتح</h3></div>
+        <button onclick="playAudio('open', 1)">🎧 نطق عادي</button><br/>
+        <button onclick="playAudio('open', 0.67)">🐢 نطق متوسط</button><br/>
+        <button onclick="playAudio('open', 0.34)">🐌 نطق بطيء</button>
+        <audio id="audio_open" preload="auto" src="audio_3/open.mp3"></audio><br/><br/>
+        <button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button>
+    </div>
+    
+    <div class="slide" id="slide7" style="display: none;">
+        <div class="word-box"><h2>paint</h2><h3>يلوّن</h3></div>
+        <button onclick="playAudio('paint', 1)">🎧 نطق عادي</button><br/>
+        <button onclick="playAudio('paint', 0.67)">🐢 نطق متوسط</button><br/>
+        <button onclick="playAudio('paint', 0.34)">🐌 نطق بطيء</button>
+        <audio id="audio_paint" preload="auto" src="audio_3/paint.mp3"></audio><br/><br/>
+        <button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button>
+    </div>
+    
+    <div class="slide" id="slide8" style="display: none;">
+        <div class="word-box"><h2>plan</h2><h3>يخطط</h3></div>
+        <button onclick="playAudio('plan', 1)">🎧 نطق عادي</button><br/>
+        <button onclick="playAudio('plan', 0.67)">🐢 نطق متوسط</button><br/>
+        <button onclick="playAudio('plan', 0.34)">🐌 نطق بطيء</button>
+        <audio id="audio_plan" preload="auto" src="audio_3/plan.mp3"></audio><br/><br/>
+        <button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button>
+    </div>
+    
+    <div class="slide" id="slide9" style="display: none;">
+        <div class="word-box"><h2>play</h2><h3>يلعب</h3></div>
+        <button onclick="playAudio('play', 1)">🎧 نطق عادي</button><br/>
+        <button onclick="playAudio('play', 0.67)">🐢 نطق متوسط</button><br/>
+        <button onclick="playAudio('play', 0.34)">🐌 نطق بطيء</button>
+        <audio id="audio_play" preload="auto" src="audio_3/play.mp3"></audio><br/><br/>
+        <button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button>
+    </div>
+    
+
+<script>
+  let current = 0;
+  const total = 10;
+  function showSlide(i) {
+    for (let j = 0; j < total; j++) {
+      document.getElementById("slide" + j).style.display = "none";
+    }
+    document.getElementById("slide" + i).style.display = "block";
+    current = i;
+  }
+  function nextSlide() { showSlide((current + 1) % total); }
+  function prevSlide() { showSlide((current - 1 + total) % total); }
+
+  function playAudio(verb, rate) {
+    const audio = document.getElementById("audio_" + verb);
+    audio.playbackRate = rate;
+    audio.play();
+  }
+</script>
+
+<button onclick="location.href='index.html'">🏠 الرجوع إلى الصفحة الرئيسية</button>
+
+<script>
+  function toggleDarkMode() {
+    const style = document.getElementById('dark-mode-style');
+    if (style.textContent === '') {
+      document.body.classList.add('dark-mode');
+      style.textContent = `
+        body { background-color: #121212; color: #e0e0e0; }
+        h1, h2, h3 { color: #80cbc4 !important; }
+        button { background-color: #455a64; color: white; }
+        a { color: #80cbc4; }
+      `;
+    } else {
+      document.body.classList.remove('dark-mode');
+      style.textContent = '';
+    }
+  }
+</script>
+
+</body>
+</html>
