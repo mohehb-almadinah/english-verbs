@@ -1,44 +1,0 @@
-
-<!DOCTYPE html>
-
-<html lang="ar">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>📘 المجموعة 2</title>
-<style>
-    body { font-family: sans-serif; text-align: center; background-color: #e0f7fa; padding: 20px; }
-    h1 { color: #01579b; }
-    h2 { font-size: 36px; color: #01579b; }
-    h3 { font-size: 28px; color: #00796b; }
-    .slide { margin-bottom: 30px; }
-    button { font-size: 20px; padding: 10px 20px; margin-top: 10px; background-color: #0288d1; color: white; border: none; border-radius: 10px; }
-    input[type=range] { width: 80%; }
-    a { color: #00796b; }
-  </style>
-</head>
-<body>
-<h1>📘 المجموعة الثانية</h1>
-<!-- الشرائح الجديدة بناءً على ملف الأفعال -->
-<div class="slide" id="slide0" style="display: block;"><h2>cry</h2><h3>يبكي</h3><br/><br/><button onclick="playAudio('cry', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('cry', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('cry', 0.34)">🐌 نطق بطيء</button><audio id="audio_cry" preload="auto" src="audio_2/cry.mp3"></audio><br/><br/><button onclick="nextSlide()">➡️ التالي</button></div><div class="slide" id="slide1" style="display: none;"><h2>dance</h2><h3>يرقص</h3><br/><br/><button onclick="playAudio('dance', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('dance', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('dance', 0.34)">🐌 نطق بطيء</button><audio id="audio_dance" preload="auto" src="audio_2/dance.mp3"></audio><br/><br/><button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button></div><div class="slide" id="slide2" style="display: none;"><h2>decide</h2><h3>يقرر</h3><br/><br/><button onclick="playAudio('decide', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('decide', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('decide', 0.34)">🐌 نطق بطيء</button><audio id="audio_decide" preload="auto" src="audio_2/decide.mp3"></audio><br/><br/><button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button></div><div class="slide" id="slide3" style="display: none;"><h2>fix</h2><h3>يصلح</h3><br/><br/><button onclick="playAudio('fix', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('fix', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('fix', 0.34)">🐌 نطق بطيء</button><audio id="audio_fix" preload="auto" src="audio_2/fix.mp3"></audio><br/><br/><button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button></div><div class="slide" id="slide4" style="display: none;"><h2>hate</h2><h3>يكره</h3><br/><br/><button onclick="playAudio('hate', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('hate', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('hate', 0.34)">🐌 نطق بطيء</button><audio id="audio_hate" preload="auto" src="audio_2/hate.mp3"></audio><br/><br/><button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button></div><div class="slide" id="slide5" style="display: none;"><h2>help</h2><h3>يساعد</h3><br/><br/><button onclick="playAudio('help', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('help', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('help', 0.34)">🐌 نطق بطيء</button><audio id="audio_help" preload="auto" src="audio_2/help.mp3"></audio><br/><br/><button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button></div><div class="slide" id="slide6" style="display: none;"><h2>hope</h2><h3>يأمل</h3><br/><br/><button onclick="playAudio('hope', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('hope', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('hope', 0.34)">🐌 نطق بطيء</button><audio id="audio_hope" preload="auto" src="audio_2/hope.mp3"></audio><br/><br/><button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button></div><div class="slide" id="slide7" style="display: none;"><h2>jump</h2><h3>يقفز</h3><br/><br/><button onclick="playAudio('jump', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('jump', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('jump', 0.34)">🐌 نطق بطيء</button><audio id="audio_jump" preload="auto" src="audio_2/jump.mp3"></audio><br/><br/><button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button></div><div class="slide" id="slide8" style="display: none;"><h2>laugh</h2><h3>يضحك</h3><br/><br/><button onclick="playAudio('laugh', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('laugh', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('laugh', 0.34)">🐌 نطق بطيء</button><audio id="audio_laugh" preload="auto" src="audio_2/laugh.mp3"></audio><br/><br/><button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button></div><div class="slide" id="slide9" style="display: none;"><h2>like</h2><h3>يحب</h3><br/><br/><button onclick="playAudio('like', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('like', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('like', 0.34)">🐌 نطق بطيء</button><audio id="audio_like" preload="auto" src="audio_2/like.mp3"></audio><br/><br/><button onclick="prevSlide()">⬅️ السابق</button></div><script>
-  let current = 0;
-  const total = 10;
-  function showSlide(i) {
-    for (let j = 0; j < total; j++) {
-      document.getElementById("slide" + j).style.display = "none";
-    }
-    document.getElementById("slide" + i).style.display = "block";
-    current = i;
-  }
-  function nextSlide() { showSlide((current + 1) % total); }
-  function prevSlide() { showSlide((current - 1 + total) % total); }
-  
-    function playAudio(verb, rate) {
-      const audio = document.getElementById("audio_" + verb);
-      audio.playbackRate = rate;
-      audio.play();
-    }
-    
-</script>
-<button onclick="location.href='index.html'">🏠 الرجوع إلى الصفحة الرئيسية</button></body>
-</html>
