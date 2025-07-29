@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+
+<html lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>📘 المجموعة 2</title>
+<style>
+    body { font-family: sans-serif; text-align: center; background-color: #e0f7fa; padding: 20px; }
+    h1 { color: #01579b; }
+    h2 { font-size: 36px; color: #01579b; }
+    h3 { font-size: 28px; color: #00796b; }
+    .slide { margin-bottom: 30px; }
+    button { font-size: 20px; padding: 10px 20px; margin-top: 10px; background-color: #0288d1; color: white; border: none; border-radius: 10px; }
+    input[type=range] { width: 80%; }
+    a { color: #00796b; }
+  </style>
+
+<style>
+.word-box {
+    background-color: #b2ebf2;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 15px auto;
+    max-width: 300px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+    border: 2px solid #0097a7;}
+.word-box h2 {
+    margin: 0;
+    font-size: 36px;
+    color: #004d40; /* أغمق ليكون أوضح */
+}
+.word-box h3 {
+    margin-top: 10px;
+    font-size: 28px;
+    color: #00695c; /* أغمق ليكون أوضح */
+}
+
+/* الوضع الليلي */
+body.dark-mode .word-box {
+    background-color: #263238;
+
+    border: 2px solid #0097a7;
+    border: 2px solid #4dd0e1;}
+body.dark-mode .word-box h2,
+body.dark-mode .word-box h3 {
+    color: #e0f7fa;
+}
+</style>
+
+
+<style id="dark-mode-style">
+</style>
+
+<style>
+.word-box {
+    background-color: #b2ebf2;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 15px auto;
+    max-width: 300px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+    border: 2px solid #0097a7;}
+.word-box h2 {
+    margin: 0;
+    font-size: 36px;
+    color: #004d40; /* أغمق ليكون أوضح */
+}
+.word-box h3 {
+    margin-top: 10px;
+    font-size: 28px;
+    color: #00695c; /* أغمق ليكون أوضح */
+}
+
+/* الوضع الليلي */
+body.dark-mode .word-box {
+    background-color: #263238;
+
+    border: 2px solid #0097a7;
+    border: 2px solid #4dd0e1;}
+body.dark-mode .word-box h2,
+body.dark-mode .word-box h3 {
+    color: #e0f7fa;
+}
+</style>
+
+
+</head>
+<body>
+
+
+<div style="display: flex; justify-content: center; align-items: center; gap: 40px;">
+<h1 style="margin: 0;">📘 المجموعة الثانية</h1>
+<button onclick="toggleDarkMode()" style="padding: 8px 14px; border-radius: 10px; background-color: #0288d1; color: white; border: none; font-size: 16px;">🌓</button>
+</div>
+<!-- الشرائح الجديدة بناءً على ملف الأفعال -->
+<div class="slide" id="slide0" style="display: block;"><div class="word-box"><h2>cry</h2><h3>يبكي</h3></div><button onclick="playAudio('cry', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('cry', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('cry', 0.34)">🐌 نطق بطيء</button><audio id="audio_cry" preload="auto" src="audio_2/cry.mp3"></audio><br/><br/><button onclick="nextSlide()">➡️ التالي</button></div><div class="slide" id="slide1" style="display: none;"><div class="word-box"><h2>dance</h2><h3>يرقص</h3></div><button onclick="playAudio('dance', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('dance', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('dance', 0.34)">🐌 نطق بطيء</button><audio id="audio_dance" preload="auto" src="audio_2/dance.mp3"></audio><br/><br/><button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button></div><div class="slide" id="slide2" style="display: none;"><div class="word-box"><h2>decide</h2><h3>يقرر</h3></div><button onclick="playAudio('decide', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('decide', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('decide', 0.34)">🐌 نطق بطيء</button><audio id="audio_decide" preload="auto" src="audio_2/decide.mp3"></audio><br/><br/><button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button></div><div class="slide" id="slide3" style="display: none;"><div class="word-box"><h2>fix</h2><h3>يصلح</h3></div><button onclick="playAudio('fix', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('fix', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('fix', 0.34)">🐌 نطق بطيء</button><audio id="audio_fix" preload="auto" src="audio_2/fix.mp3"></audio><br/><br/><button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button></div><div class="slide" id="slide4" style="display: none;"><div class="word-box"><h2>hate</h2><h3>يكره</h3></div><button onclick="playAudio('hate', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('hate', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('hate', 0.34)">🐌 نطق بطيء</button><audio id="audio_hate" preload="auto" src="audio_2/hate.mp3"></audio><br/><br/><button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button></div><div class="slide" id="slide5" style="display: none;"><div class="word-box"><h2>help</h2><h3>يساعد</h3></div><button onclick="playAudio('help', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('help', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('help', 0.34)">🐌 نطق بطيء</button><audio id="audio_help" preload="auto" src="audio_2/help.mp3"></audio><br/><br/><button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button></div><div class="slide" id="slide6" style="display: none;"><div class="word-box"><h2>hope</h2><h3>يأمل</h3></div><button onclick="playAudio('hope', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('hope', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('hope', 0.34)">🐌 نطق بطيء</button><audio id="audio_hope" preload="auto" src="audio_2/hope.mp3"></audio><br/><br/><button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button></div><div class="slide" id="slide7" style="display: none;"><div class="word-box"><h2>jump</h2><h3>يقفز</h3></div><button onclick="playAudio('jump', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('jump', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('jump', 0.34)">🐌 نطق بطيء</button><audio id="audio_jump" preload="auto" src="audio_2/jump.mp3"></audio><br/><br/><button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button></div><div class="slide" id="slide8" style="display: none;"><div class="word-box"><h2>laugh</h2><h3>يضحك</h3></div><button onclick="playAudio('laugh', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('laugh', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('laugh', 0.34)">🐌 نطق بطيء</button><audio id="audio_laugh" preload="auto" src="audio_2/laugh.mp3"></audio><br/><br/><button onclick="prevSlide()" style="margin-left: 10px; margin-right: 10px;">⬅️ السابق</button><button onclick="nextSlide()">➡️ التالي</button></div><div class="slide" id="slide9" style="display: none;"><div class="word-box"><h2>like</h2><h3>يحب</h3></div><button onclick="playAudio('like', 1)">🎧 نطق عادي</button><br/><button onclick="playAudio('like', 0.67)">🐢 نطق متوسط</button><br/><button onclick="playAudio('like', 0.34)">🐌 نطق بطيء</button><audio id="audio_like" preload="auto" src="audio_2/like.mp3"></audio><br/><br/><button onclick="prevSlide()">⬅️ السابق</button></div><script>
+  let current = 0;
+  const total = 10;
+  function showSlide(i) {
+    for (let j = 0; j < total; j++) {
+      document.getElementById("slide" + j).style.display = "none";
+    }
+    document.getElementById("slide" + i).style.display = "block";
+    current = i;
+  }
+  function nextSlide() { showSlide((current + 1) % total); }
+  function prevSlide() { showSlide((current - 1 + total) % total); }
+  
+    function playAudio(verb, rate) {
+      const audio = document.getElementById("audio_" + verb);
+      audio.playbackRate = rate;
+      audio.play();
+    }
+    
+</script>
+<button onclick="location.href='index.html'">🏠 الرجوع إلى الصفحة الرئيسية</button>
+<script>
+  function toggleDarkMode() {
+    const style = document.getElementById('dark-mode-style');
+    if (style.textContent === '') {
+      document.body.classList.add('dark-mode');
+    style.textContent = `
+
+        body { background-color: #121212; color: #e0e0e0; }
+        h1, h2, h3 { color: #80cbc4 !important; }
+        button { background-color: #455a64; color: white; }
+        a { color: #80cbc4; }
+      
+body { background-color: #121212; color: #e0e0e0; }
+body.dark-mode .word-box { background-color: #263238; 
+    border: 2px solid #0097a7;
+    border: 2px solid #4dd0e1;}
+body.dark-mode .word-box h2,
+body.dark-mode .word-box h3 { color: #e0f7fa; }
+`;
+    } else {
+      document.body.classList.remove('dark-mode');
+    style.textContent = '';
+    }
+  }
+</script>
+
+</body>
+</html>
