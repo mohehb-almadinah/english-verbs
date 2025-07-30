@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>اختبار الترجمة القرائي - المجموعة الخامسة</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body { font-family: sans-serif; background-color: #f1f8e9; text-align: center; padding: 30px; direction: rtl; }
+    h1 { color: #33691e; }
+    .question-box, .intro-box, .result-box {
+      background: #ffffff; padding: 20px; border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px auto;
+      width: 90%; max-width: 500px;
+    }
+    button {
+      padding: 10px 20px; font-size: 18px; margin: 10px;
+      background-color: #689f38; color: white;
+      border: none; border-radius: 8px; cursor: pointer;
+    }
+    button:hover { background-color: #558b2f; }
+    .feedback { font-size: 20px; margin-top: 15px; min-height: 30px; }
+    .hidden { display: none; }
+    input[type="text"] {
+      padding: 10px; font-size: 18px; width: 80%;
+      margin-top: 10px; border-radius: 8px;
+      border: 1px solid #ccc; text-align: center;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 18px; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+    .summary { text-align: center; direction: rtl; }
+  </style>
+
+
+
+
+
+<!-- jsPDF وملف خط عربي Amiri -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+async function generatePDF(studentName) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  // تحميل خط Amiri Base64 من مكتبة jsPDF
+  const amiriFontBase64 = `AAEAAAALAIAAAwAwT1MvMggiQ1QAAAC8AAAAYGNtYXAa5WhzAAABHAAAAExnYXNwAAAAEAAAAVgAAAAIZ2x5ZnbUqxoAAAF4AAAGNGhlYWQNsNCEAAADcAAAADZoaGVhB5AAjAAAArgAAAAkaG10eAIAAA4AAACwAAAAMGxvY2EACAAHAAADKAAAAAhtYXhwABQAMgAAAxwAAAAgbmFtZc3+vv8AAAOkAAABfXBvc3QAAwAAAAAFqAAAACAAAwPjAZAABQAAAAgAAAAAAAAABAAADwP//AAAAAAAD6AAEAAAAAAAEAAQAAAAAAAgABAAMAAQAAABAAAAAAAAADAAEAAAAAAAIABwAkAAYAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAABgABAAMAAAAAAAAAAAAAAAAAAAADAAEAAAAAAAIAAQAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAEAAAAAAAwAAwACAAD8APwAAwAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAACAAEAAgAAADoB1QABAAAAAAABAAgAAQAAAAAAAAAAAAAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAMAAAADAAAADgAdAAEAAgAKAA4AFgA9AFYAWABkAH4AjwAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=`;
+
+  doc.addFileToVFS("Amiri-Regular.ttf", amiriFontBase64);
+  doc.addFont("Amiri-Regular.ttf", "Amiri", "normal");
+  doc.setFont("Amiri");
+  doc.setFontSize(22);
+
+  const date = new Date().toLocaleDateString('ar-EG');
+
+  doc.text("شهادة نجاح", 105, 30, { align: "center" });
+  doc.setFontSize(16);
+  doc.text("تشهد بوابة تعلم اللغة الإنجليزية أن الطالب:", 105, 50, { align: "center" });
+  doc.setFontSize(20);
+  doc.text(studentName, 105, 65, { align: "center" });
+  doc.setFontSize(16);
+  doc.text("قد اجتاز اختبار الترجمة القرائي – مجموعة الأفعال الخامسة بنجاح", 105, 85, { align: "center" });
+  doc.text("📘 مدير بوابة تعلم اللغة الإنجليزية", 105, 115, { align: "center" });
+  doc.text("د. محمد العوفي", 105, 125, { align: "center" });
+  doc.setFontSize(12);
+  doc.text("التاريخ: " + date, 200, 145, { align: "right" });
+
+  doc.save("شهادة_" + studentName + ".pdf");
+}
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+async function generatePDF(studentName) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: "landscape" });
+
+  const image = new Image();
+  image.src = "certificate_background.png";
+
+  image.onload = function () {
+    doc.addImage(image, "PNG", 0, 0, 297, 210); // A4 landscape
+
+    const date = new Date().toLocaleDateString("ar-EG");
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(20);
+    doc.text(studentName, 148, 110, { align: "center" });  // اسم الطالب في الوسط
+
+    doc.setFontSize(12);
+    doc.text("التاريخ: " + date, 280, 200, { align: "right" });  // التاريخ أسفل يمين
+
+    doc.save("شهادة_" + studentName + ".pdf");
+  };
+}
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+function generatePDF(studentName) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: "landscape" });
+
+  const image = new Image();
+  image.src = "certificate_background.png";
+
+  image.onload = function () {
+    doc.addImage(image, "PNG", 0, 0, 297, 210);
+
+    const date = new Date().toLocaleDateString("ar-EG");
+
+    doc.setFont("courier", "bold");
+    doc.setFontSize(20);
+    doc.text(studentName, 148, 110, { align: "center" });
+
+    doc.setFontSize(12);
+    doc.text("التاريخ: " + date, 280, 200, { align: "right" });
+
+    doc.save("شهادة_" + studentName + ".pdf");
+  };
+}
+</script>
+
+</head>
+<body>
+  <h1>📝 اختبار الترجمة القرائي - المجموعة الخامسة</h1>
+
+  <div class="intro-box" id="introBox">
+    <h2>الرجاء إدخال اسمك لبدء الاختبار:</h2>
+    <input type="text" id="studentName" placeholder="اسم الطالب" />
+    <br /><br />
+    <button id="startButton">ابدأ الاختبار</button>
+  </div>
+
+  <div class="question-box hidden" id="quizBox">
+    <h2 id="questionNumber"></h2>
+    <h3 id="question"></h3>
+    <div id="choices"></div>
+    <div class="feedback" id="feedback"></div>
+    
+    <button onclick="nextQuestion()" id="nextBtn">➡️ التالي</button>
+    <button onclick="submitQuiz()" id="submitBtn" class="hidden">📤 تسليم الاختبار</button>
+    
+    <button onclick="prevQuestion()" id="prevBtn">⬅️ السابق</button>
+  </div>
+
+  <div class="question-box hidden" id="reviewSlide">
+    <h2>📋 تأكد من إجاباتك</h2>
+    <p>يمكنك مراجعة إجاباتك قبل التسليم.</p>
+    <button onclick="prevFromReview()">⬅️ السابق</button>
+    <button onclick="reviewAnswers()">🔎 مراجعة الإجابات</button>
+    <button onclick="submitQuiz()">📤 تسليم الاختبار</button>
+  </div>
+
+  <div class="result-box hidden" id="resultBox">
+    <h2 id="score"></h2>
+    <div id="summary" class="summary"></div>
+  </div>
+
+  <button onclick="location.href='index.html'">🏠 الرجوع للصفحة الرئيسية</button>
+
+<script>
+const originalQuizData = [
+  { word: "taste", correct: "يتذوق", options: ["ينتظر", "يتذوق", "يعمل"] },
+  { word: "touch", correct: "يلمس", options: ["يشاهد", "يغسل", "يلمس"] },
+  { word: "try", correct: "يحاول", options: ["يمشي", "يحاول", "يعمل"] },
+  { word: "travel", correct: "يسافر", options: ["يمشي", "ينتظر", "يسافر"] },
+  { word: "visit", correct: "يزور", options: ["يزور", "يشاهد", "يلمس"] },
+  { word: "wait", correct: "ينتظر", options: ["يمشي", "ينتظر", "يعمل"] },
+  { word: "walk", correct: "يمشي", options: ["يمشي", "ينتظر", "يتذوق"] },
+  { word: "wash", correct: "يغسل", options: ["يلمس", "يغسل", "يسافر"] },
+  { word: "watch", correct: "يشاهد", options: ["يمشي", "يشاهد", "يعمل"] },
+  { word: "work", correct: "يعمل", options: ["يسافر", "يلمس", "يعمل"] },
+];
+let quizData = [];
+let current = 0;
+let answers = [];
+let choicesOrder = [];
+let student = "";
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+document.getElementById("startButton").addEventListener("click", startQuiz);
+
+function startQuiz() {
+  const name = document.getElementById("studentName").value.trim();
+  if (!name) {
+    alert("يرجى إدخال الاسم قبل البدء.");
+    return;
+  }
+  student = name;
+  quizData = shuffle([...originalQuizData]);
+  answers = Array(quizData.length).fill(null);
+  choicesOrder = quizData.map(q => shuffle([...q.options]));
+  document.getElementById("introBox").classList.add("hidden");
+  document.getElementById("quizBox").classList.remove("hidden");
+  loadQuestion();
+}
+
+function loadQuestion() {
+  const q = quizData[current];
+  document.getElementById("questionNumber").textContent = `السؤال ${current + 1} من ${quizData.length}`;
+  document.getElementById("question").textContent = `ما ترجمة: "${q.word}"؟`;
+  const choicesDiv = document.getElementById("choices");
+  choicesDiv.innerHTML = "";
+  choicesOrder[current].forEach(option => {
+    const btn = document.createElement("button");
+    btn.textContent = option;
+    if (answers[current] === option) btn.style.border = "3px solid black";
+    btn.onclick = () => { answers[current] = option; loadQuestion(); };
+    choicesDiv.appendChild(btn);
+  });
+
+  document.getElementById("nextBtn").classList.toggle("hidden", current === quizData.length - 1);
+  
+  document.getElementById("feedback").innerHTML = "";
+  
+  document.getElementById("submitBtn").classList.toggle("hidden", current !== quizData.length - 1);
+  document.getElementById("prevBtn").classList.toggle("hidden", current === 0);
+    
+    
+}
+
+function nextQuestion() {
+  if (current < quizData.length - 1) {
+    current++;
+    loadQuestion();
+  } else {
+    document.getElementById("quizBox").classList.add("hidden");
+    document.getElementById("reviewSlide").classList.remove("hidden");
+  }
+}
+
+function prevQuestion() {
+  if (current > 0) {
+    current--;
+    loadQuestion();
+  }
+}
+
+function reviewAnswers() {
+  let table = "<table><tr><th>السؤال</th><th>إجابتك</th></tr>";
+  quizData.forEach((q, i) => {
+    const answer = answers[i] || "لم تُجب";
+    table += `<tr><td>${i + 1}. ${q.word}</td><td>${answer}</td></tr>`;
+  });
+  table += "</table>";
+  
+  document.getElementById("feedback").innerHTML = "";
+  
+  document.getElementById("submitBtn").classList.toggle("hidden", current !== quizData.length - 1);
+  document.getElementById("prevBtn").classList.toggle("hidden", current === 0);
+    
+    
+  document.getElementById("reviewSlide").insertAdjacentHTML("beforeend", table);
+}
+
+
+function submitQuiz() {
+  if (answers.includes(null)) {
+    alert("يرجى الإجابة على جميع الأسئلة قبل تسليم الاختبار.");
+    return;
+  }
+    
+  let score = 0;
+  for (let i = 0; i < quizData.length; i++) {
+    if (answers[i] === quizData[i].correct) score++;
+  }
+
+  document.getElementById("quizBox").classList.add("hidden");
+  const finalScore = document.getElementById("score");
+  finalScore.innerHTML = `<strong>${student}</strong>، نتيجتك: <strong>${score} من ${quizData.length}</strong>`;
+  if (score >= 8) {
+    finalScore.innerHTML += '<br><span style="color:green; font-size: 24px;">أحسنت، استمر ووفقك الله 🌟</span>';
+  finalScore.innerHTML += `<br><button onclick="generatePDF(student)">📄 تحميل شهادة النجاح (PDF)</button>`;
+  
+  
+  
+  finalScore.innerHTML += `<br><button onclick="downloadCertificate(student)">📄 تحميل شهادة النجاح</button>`;
+  } else {
+    finalScore.innerHTML += '<br><span style="color:red; font-size: 24px;">تحتاج إلى مراجعة الدرس مرة أخرى.</span>';
+  }
+
+  const summary = document.getElementById("summary");
+  let table = "<table><tr><th>السؤال</th><th>إجابتك</th><th>النتيجة</th></tr>";
+  quizData.forEach((q, i) => {
+    const answer = answers[i] || "لم تُجب";
+    const isCorrect = answer === q.correct;
+    table += `<tr>
+      <td>${i + 1}. ${q.word}</td>
+      <td>${answer}</td>
+      <td style="color:${isCorrect ? 'green' : 'red'}">
+        ${isCorrect ? "✅ صحيحة" : `❌ خاطئة (الصحيح: ${q.correct})`}
+      </td>
+    </tr>`;
+  });
+  table += "</table>";
+  summary.innerHTML = table;
+  document.getElementById("resultBox").classList.remove("hidden");
+}
+
+function prevFromReview() {
+  document.getElementById("reviewSlide").classList.add("hidden");
+  document.getElementById("quizBox").classList.remove("hidden");
+  current = quizData.length - 1;
+  loadQuestion();
+}
+
+function downloadCertificate(studentName) {
+  const certText = `شهادة نجاح\n\nتشهد بوابة تعلم اللغة الإنجليزية أن الطالب: ${studentName}\nقد اجتاز اختبار الترجمة القرائي - المجموعة الخامسة بنجاح.\n\nأحسنت ونتمنى لك دوام التوفيق!`;
+  const blob = new Blob([certText], { type: "text/plain;charset=utf-8" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `شهادة_${studentName}.txt`;
+  link.click();
+}
+</script>
+
+<script>
+async function generatePDF(studentName) {
+  const {{ jsPDF }} = window.jspdf;
+  const doc = new jsPDF();
+
+  const date = new Date().toLocaleDateString('ar-EG');
+
+  doc.setFont("courier", "bold");
+  doc.setFontSize(24);
+  doc.text("شهادة نجاح", 105, 30, { align: "center" });
+
+  doc.setFontSize(16);
+  doc.setFont("courier", "normal");
+  doc.text("تشهد بوابة تعلم اللغة الإنجليزية أن الطالب:", 105, 50, { align: "center" });
+  doc.setFontSize(20);
+  doc.text(studentName, 105, 65, { align: "center" });
+  doc.setFontSize(16);
+  doc.text("قد اجتاز اختبار الترجمة القرائي – مجموعة الأفعال الخامسة بنجاح", 105, 80, { align: "center" });
+
+  doc.text("📘 مدير بوابة تعلم اللغة الإنجليزية", 105, 110, { align: "center" });
+  doc.text("د. محمد العوفي", 105, 120, { align: "center" });
+  doc.setFontSize(12);
+  doc.text("التاريخ: " + date, 200, 140, { align: "right" });
+
+  doc.save("شهادة_" + studentName + ".pdf");
+}
+</script>
+
+
+
+
+</body>
+</html>
