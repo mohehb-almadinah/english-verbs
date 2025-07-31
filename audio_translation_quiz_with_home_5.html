@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="utf-8"/>
+<title>📝 اختبار الترجمة الصوتي - المجموعة الخامسة</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
+  body { font-family: sans-serif; background-color: #f0f8ff; direction: rtl; text-align: center; padding: 30px; }
+  .box { background: white; border-radius: 15px; box-shadow: 0 0 10px #ccc; padding: 20px; margin: auto; max-width: 600px; }
+  button { font-size: 20px; padding: 10px 25px; margin: 10px; background-color: #1976d2; color: white; border: none; border-radius: 8px; cursor: pointer; }
+  button:hover { background-color: #0d47a1; }
+  .hidden { display: none; }
+  audio { margin: 20px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  th, td { border: 1px solid #ccc; padding: 10px; }
+</style>
+</head>
+<body>
+<h1>🎧 اختبار الترجمة الصوتي - المجموعة الخامسة</h1>
+<div class="box" id="introBox">
+<h2>فضلاً أدخل اسمك للبدء:</h2>
+<input id="studentName" placeholder="اسم الطالب" style="font-size:18px; padding:10px; width:80%; border-radius:8px; border:1px solid #ccc;" type="text"/>
+<br/><br/>
+
+<button onclick="startQuiz()">ابدأ الاختبار</button>
+</div>
+<div class="box hidden" id="quizBox"><div id="timer" style="font-size:20px; font-weight:bold; color:#d32f2f; margin-bottom:15px;">⏳ الوقت المتبقي: 05:00</div><div id="progressCounter" style="font-size: 18px; font-weight: bold; margin-bottom: 10px; color: #1976d2;">📊 تم الإجابة على 0 من 10</div>
+<h2 id="questionTitle"></h2>
+<audio controls="" id="audioPlayer"></audio>
+<div id="optionsContainer"></div>
+<div style="margin-top:20px;">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+<button id="nextBtn" onclick="nextQuestion()">➡️ التالي</button>
+<button id="prevBtn" onclick="prevQuestion()">⬅️ السابق</button>
+<button class="hidden" id="reviewBtn" onclick="reviewBeforeSubmit()" style="background-color: #388e3c; color: white;">🔍 مراجعة قبل التسليم النهائي</button>
+<button class="hidden" id="submitBtn" onclick="forceSubmit()" style="background-color: #d32f2f;">📤 تسليم الاختبار</button>
+</div>
+</div>
+</div>
+<div class="box hidden" id="resultBox">
+<h2 id="score"></h2>
+<div id="summary"></div>
+</div>
+<script>
+let timerInterval;
+let timeLeft = 300;
+
+function startTimer() {
+  const timerDisplay = document.getElementById("timer");
+  timerInterval = setInterval(() => {
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      alert("انتهى الوقت! تم تسليم الاختبار تلقائيًا.");
+      submitQuiz();
+      return;
+    }
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
+    timerDisplay.textContent = "⏳ الوقت المتبقي: " + 
+      String(minutes).padStart(2, '0') + ":" + String(seconds).padStart(2, '0');
+    timeLeft--;
+  }, 1000);
+}
+
+let quizData = [
+  ["taste", "يتذوق", ["يحاول", "يعمل", "يتذوق"]],
+  ["touch", "يلمس", ["يحاول", "يتذوق", "يلمس"]],
+  ["try", "يحاول", ["يعمل", "ينتظر", "يحاول"]],
+  ["travel", "يسافر", ["يسافر", "يلمس", "يزور"]],
+  ["visit", "يزور", ["يزور", "يعمل", "يمشي"]],
+  ["wait", "ينتظر", ["ينتظر", "يلمس", "يعمل"]],
+  ["walk", "يمشي", ["يمشي", "يحاول", "يغسل"]],
+  ["wash", "يغسل", ["يلمس", "يغسل", "يحاول"]],
+  ["watch", "يشاهد", ["يتذوق", "يسافر", "يشاهد"]],
+  ["work", "يعمل", ["يعمل", "يلمس", "يتذوق"]],
+];
+quizData = quizData.sort(() => Math.random() - 0.5);
+let current = 0;
+let answers = Array(quizData.length).fill(null);
+let student = "";
+let usedCodes = new Set();
+
+let validCodes = {
+  "4832": "صالح",
+  "7261": "فيصل",
+  "5467": "أحمد",
+  "1904": "محمد",
+  "8773": "نوف",
+  "6532": "أفنان",
+  "2048": "ثامر"
+};
+
+function startQuiz() {
+  const name = document.getElementById("studentName").value.trim();
+  if (!name) { alert("يرجى إدخال الاسم للبدء."); return; }
+  student = name;
+  document.getElementById("introBox").classList.add("hidden");
+  document.getElementById("quizBox").classList.remove("hidden");
+  loadQuestion();
+  startTimer();
+}
+
+function loadQuestion() {
+  const questionTitle = document.getElementById("questionTitle");
+  if (answers[current] === null) questionTitle.style.color = "red";
+  else questionTitle.style.color = "black";
+  updateProgressCounter();
+  const q = quizData[current];
+  document.getElementById("questionTitle").textContent = "السؤال " + (current + 1) + " من " + quizData.length + ": ما ترجمة الكلمة المسموعة؟";
+  document.getElementById("audioPlayer").src = "audio_5/" + q[0] + ".mp3";
+  const container = document.getElementById("optionsContainer");
+  container.innerHTML = "";
+  q[2].forEach(option => {
+    const btn = document.createElement("button");
+    btn.textContent = option;
+    btn.onclick = () => { answers[current] = option; loadQuestion(); };
+    if (answers[current] === option) btn.style.border = "3px solid black";
+    container.appendChild(btn);
+  });
+  document.getElementById("prevBtn").style.display = current > 0 ? "inline-block" : "none";
+  document.getElementById("nextBtn").style.display = current < quizData.length - 1 ? "inline-block" : "none";
+  document.getElementById("submitBtn").classList.toggle("hidden", current !== quizData.length - 1);
+  document.getElementById("reviewBtn").classList.toggle("hidden", current !== quizData.length - 1);
+}
+
+function nextQuestion() { if (current < quizData.length - 1) { current++; loadQuestion(); } }
+function prevQuestion() { if (current > 0) { current--; loadQuestion(); } }
+
+function submitQuiz() {
+  document.getElementById("quizBox").classList.add("hidden");
+  const resultBox = document.getElementById("resultBox");
+  const scoreElem = document.getElementById("score");
+  let score = 0;
+  let summary = "<table><tr><th>رقم السؤال</th><th>المقطع الصوتي</th><th>إجابتك</th><th>النتيجة</th></tr>";
+  quizData.forEach((q, i) => {
+    const correct = q[1];
+    const userAnswer = answers[i];
+    const isCorrect = userAnswer === correct;
+    if (isCorrect) score++;
+    summary += '<tr><td>' + (i + 1) + '</td><td>' + '<audio controls src=\"audio_5/' + q[0] + '.mp3\"></audio>' + '</td><td>' + userAnswer + '</td><td style="color:' + (isCorrect ? 'green' : 'red') + '">' +
+               (isCorrect ? '✅ صحيحة' : '❌ خاطئة (الصحيح: ' + correct + ')') + '</td></tr>';
+  });
+  summary += "</table>";
+  scoreElem.innerHTML = "<strong>" + student + "</strong>، نتيجتك: <strong>" + score + " من " + quizData.length + "</strong><br>" +
+    (score >= 8 ? '<span style="color:green; font-size: 20px;">أحسنت! 🌟 استمر وفقك الله</span><br><button onclick="generateCertificate()" style="margin-top:20px; background-color:#4caf50;">📄 تحميل شهادة النجاح</button>' : '<span style="color:red; font-size: 20px;">تحتاج إلى مراجعة الدرس.</span>');
+  document.getElementById("summary").innerHTML = summary;
+  resultBox.classList.remove("hidden");
+}
+
+function reviewBeforeSubmit() {
+  if (answers.includes(null)) {
+    alert("بعض الأسئلة لم يتم حلها، وتم تمييزها باللون الأحمر.");
+    const unansweredIndex = answers.findIndex(ans => ans === null);
+    current = unansweredIndex;
+    loadQuestion();
+    return;
+  }
+  submitQuiz();
+}
+
+function forceSubmit() {
+  clearInterval(timerInterval);
+  submitQuiz();
+}
+
+function updateProgressCounter() {
+  const answered = answers.filter(ans => ans !== null).length;
+  const total = quizData.length;
+  const counter = document.getElementById("progressCounter");
+  counter.textContent = "📊 تم الإجابة على " + answered + " من " + total;
+}
+
+let certificateBtn;
+function generateCertificate() {
+  const certificateWindow = window.open("", "_blank");
+  certificateWindow.document.write(`
+    <html lang="ar">
+    <head>
+      <meta charset="UTF-8">
+      <title>شهادة نجاح</title>
+      <style>
+        @media print {
+          @page {
+            size: A4 landscape;
+            margin: 0;
+          }
+          body {
+            margin: 0;
+          }
+        }
+        body {
+          font-family: 'Arial', sans-serif;
+          direction: rtl;
+          text-align: center;
+          background-color: #f0f8e9;
+          padding: 80px;
+        }
+        .certificate-box {
+          background-color: #ffffff;
+          border: 10px solid #4caf50;
+          padding: 40px;
+          border-radius: 20px;
+          width: 100%;
+          box-sizing: border-box;
+          box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+          color: #2e7d32;
+          font-size: 48px;
+          margin-bottom: 20px;
+        }
+        h2 {
+          color: #1976d2;
+          font-size: 36px;
+          margin: 20px 0;
+        }
+        p {
+          font-size: 24px;
+          margin: 10px 0;
+        }
+        .footer {
+          margin-top: 60px;
+          font-size: 18px;
+          color: #555;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="certificate-box">
+        <h1>🎓شهادة نجاح🎓</h1>
+        <p>تشهد بوابة تعلم اللغة الإنجليزية أن الطالب/ ـه</p>
+        <h2>${student}</h2>
+        <p>قد اجتاز اختبار الترجمة الصوتي - مجموعة الأفعال الخامسة بنجاح</p>
+        <p>📘ونتمى له/ ـها دوام التوفيق والنجاح📘 </p>
+        <p class="footer" style="font-weight:bold;">د. محمد العوفي</p>
+        <p class="footer">تاريخ الشهادة: ${(new Date()).toLocaleDateString('en-GB')}</p>
+      </div>
+    </body>
+    </html>
+  `);
+  certificateWindow.document.close();
+  certificateWindow.print();
+}
+
+</script>
+<div style="margin-top: 40px;">
+<button onclick="location.href='index.html'" style="background-color:#9e9e9e;">🏠 الرجوع إلى الصفحة الرئيسية</button>
+</div>
+</body>
+</html>
