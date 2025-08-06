@@ -1,0 +1,414 @@
+
+
+<!DOCTYPE html>
+
+<html lang="ar">
+<head>
+<meta charset="utf-8"/>
+<title>اختبار الترجمة القرائي - المجموعة السادسة </title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
+    body { font-family: sans-serif; background-color: #f1f8e9; text-align: center; padding: 30px; direction: rtl; }
+    h1 { color: #33691e; }
+    .question-box, .intro-box, .result-box {
+      background: #ffffff; padding: 20px; border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px auto;
+      width: 90%; max-width: 500px;
+    }
+    button {
+      padding: 10px 20px; font-size: 18px; margin: 10px;
+      background-color: #689f38; color: white;
+      border: none; border-radius: 8px; cursor: pointer;
+    }
+    button:hover { background-color: #558b2f; }
+    .feedback { font-size: 20px; margin-top: 15px; min-height: 30px; }
+    .hidden { display: none; }
+    input[type="text"] {
+      padding: 10px; font-size: 18px; width: 80%;
+      margin-top: 10px; border-radius: 8px;
+      border: 1px solid #ccc; text-align: center;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 18px; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+    .summary { text-align: center; direction: rtl; }
+  </style>
+</head>
+<body>
+<h1>📝 اختبار الترجمة القرائي - المجموعة السادسة</h1>
+<div class="intro-box" id="introBox">
+<h2>الرجاء إدخال اسمك لبدء الاختبار:</h2>
+<input id="studentName" placeholder="اسم الطالب" type="text"/>
+<br/><br/>
+<button id="startButton">ابدأ الاختبار</button>
+</div>
+<div class="question-box hidden" id="quizBox">
+<h2 id="questionNumber"></h2>
+<h3 id="question"></h3>
+<div id="choices"></div>
+<div class="feedback" id="feedback"></div>
+<button id="nextBtn" onclick="nextQuestion()">➡️ التالي</button>
+<button class="hidden" id="submitBtn" onclick="submitQuiz()" style="background-color: red;">📤 تسليم الاختبار</button>
+<button class="hidden" id="reviewBeforeBtn" onclick="reviewBeforeSubmit()" style="background-color: #1976d2;">🔎 مراجعة قبل التسليم</button>
+<button id="prevBtn" onclick="prevQuestion()">⬅️ السابق</button>
+</div>
+<div class="question-box hidden" id="reviewSlide">
+<h2>📋 تأكد من إجاباتك</h2>
+<p>يمكنك مراجعة إجاباتك قبل التسليم.</p>
+<button onclick="prevFromReview()">⬅️ السابق</button>
+<button onclick="submitQuiz()" style="background-color: red;">📤 تسليم الاختبار</button>
+</div>
+<div class="result-box hidden" id="resultBox">
+<h2 id="score"></h2>
+<div class="summary" id="summary"></div>
+</div>
+<div id="homeButtonBox"><button onclick="location.href='index.html'">🏠 الرجوع للصفحة الرئيسية</button></div>
+<script>
+const originalQuizData = [
+  { word: "be", correct: "يكون", options: ["يكون", "يكسر", "يختار"] },
+  { word: "become", correct: "يُصبح", options: ["يبني", "يُصبح", "يُحضر"] },
+  { word: "begin", correct: "يبدأ", options: ["يبدأ", "يشتري", "يُمسك"] },
+  { word: "break", correct: "يكسر", options: ["يختار", "يكسر", "يكون"] },
+  { word: "bring", correct: "يُحضر", options: ["يشتري", "يُحضر", "يبدأ"] },
+  { word: "build", correct: "يبني", options: ["يبني", "يُمسك", "يستطيع"] },
+  { word: "buy", correct: "يشتري", options: ["يُصبح", "يشتري", "يبني"] },
+  { word: "can", correct: "يستطيع", options: ["يستطيع", "يُحضر", "يُمسك"] },
+  { word: "catch", correct: "يُمسك", options: ["يُمسك", "يبدأ", "يكون"] },
+  { word: "choose", correct: "يختار", options: ["يختار", "يبني", "يُصبح"] },
+];
+let quizData = [];
+let current = 0;
+let answers = [];
+let choicesOrder = [];
+let student = "";
+let fromReview = false;
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+document.getElementById("startButton").addEventListener("click", startQuiz);
+
+function startQuiz() {
+  const name = document.getElementById("studentName").value.trim();
+  if (!name) {
+    alert("يرجى إدخال الاسم قبل البدء.");
+    return;
+  }
+  student = name;
+  quizData = shuffle([...originalQuizData]);
+  answers = Array(quizData.length).fill(null);
+  choicesOrder = quizData.map(q => shuffle([...q.options]));
+  document.getElementById("introBox").classList.add("hidden");
+  document.getElementById("quizBox").classList.remove("hidden");
+  document.getElementById("homeButtonBox").style.display = "none";
+  loadQuestion();
+}
+
+function loadQuestion() {
+  document.getElementById("submitBtn").classList.add("hidden");
+  const q = quizData[current];
+  document.getElementById("questionNumber").textContent = `السؤال ${current + 1} من ${quizData.length}`;
+  document.getElementById("question").textContent = `ما الترجمة الصحيحة لكلمة: "${q.word}"؟`;
+  const choicesDiv = document.getElementById("choices");
+  choicesDiv.innerHTML = "";
+  choicesOrder[current].forEach(option => {
+    const btn = document.createElement("button");
+    btn.textContent = option;
+    if (answers[current] === option) btn.style.border = "3px solid black";
+    btn.onclick = () => { answers[current] = option; loadQuestion(); };
+    choicesDiv.appendChild(btn);
+  });
+
+  
+  
+if (fromReview) {
+  document.getElementById("reviewBeforeBtn").classList.remove("hidden");
+  document.getElementById("nextBtn").classList.add("hidden");
+  document.getElementById("prevBtn").classList.add("hidden");
+  return;
+} else {
+  if (current === quizData.length - 1) {
+    document.getElementById("reviewBeforeBtn").classList.remove("hidden");
+  } else {
+    document.getElementById("reviewBeforeBtn").classList.add("hidden");
+  }
+  document.getElementById("nextBtn").classList.toggle("hidden", current === quizData.length - 1);
+  document.getElementById("prevBtn").classList.toggle("hidden", current === 0);
+}
+  
+  document.getElementById("feedback").innerHTML = "";
+  
+  
+            
+  
+  document.getElementById("prevBtn").classList.toggle("hidden", current === 0);
+    
+    
+}
+
+function nextQuestion() {
+  if (current < quizData.length - 1) {
+    current++;
+    loadQuestion();
+  } else {
+  if (current === quizData.length - 1) {
+    document.getElementById("reviewBeforeBtn").classList.remove("hidden");
+  } else {
+    document.getElementById("reviewBeforeBtn").classList.add("hidden");
+  }
+  document.getElementById("nextBtn").classList.toggle("hidden", current === quizData.length - 1);
+  document.getElementById("prevBtn").classList.toggle("hidden", current === 0);
+}
+}
+
+function prevQuestion() {
+  if (current > 0) {
+    current--;
+    loadQuestion();
+  }
+}
+
+function reviewAnswers() {
+  let table = "<table><tr><th>السؤال</th><th>إجابتك</th></tr>";
+  quizData.forEach((q, i) => {
+    const answer = answers[i] || "لم تُجب";
+    table += `<tr><td>${i + 1}. ${q.word}</td><td>${answer}</td></tr>`;
+  });
+  table += "</table>";
+  
+  document.getElementById("feedback").innerHTML = "";
+  
+  
+            
+  
+  document.getElementById("prevBtn").classList.toggle("hidden", current === 0);
+    
+    
+  document.getElementById("reviewSlide").insertAdjacentHTML("beforeend", table);
+}
+
+
+function submitQuiz() {
+  fromReview = false;
+  const unanswered = answers.map((a, i) => a === null ? i + 1 : null).filter(v => v !== null);
+  if (unanswered.length > 0) {
+    
+  }
+
+  if (answers.includes(null)) {
+    
+  }
+    
+  let score = 0;
+  for (let i = 0; i < quizData.length; i++) {
+    if (answers[i] === quizData[i].correct) score++;
+  }
+
+  document.getElementById("quizBox").classList.add("hidden");
+  document.getElementById("reviewSlide").classList.add("hidden");
+  const finalScore = document.getElementById("score");
+  finalScore.innerHTML = `<strong>${student}</strong>، نتيجتك: <strong>${score} من ${quizData.length}</strong>`;
+  if (score >= 9) {
+    finalScore.innerHTML += '<br><span style="color:green; font-size: 24px;">أحسنت، استمر ووفقك الله 🌟</span>';
+  finalScore.innerHTML += `<br><button onclick="generateCertificate(student)">📄 تحميل شهادة النجاح (PDF)</button>`;
+  
+  
+  } else {
+  if (current === quizData.length - 1) {
+    document.getElementById("reviewBeforeBtn").classList.remove("hidden");
+  } else {
+    document.getElementById("reviewBeforeBtn").classList.add("hidden");
+  }
+  document.getElementById("nextBtn").classList.toggle("hidden", current === quizData.length - 1);
+  document.getElementById("prevBtn").classList.toggle("hidden", current === 0);
+}
+
+  const summary = document.getElementById("summary");
+  let table = "<table><tr><th>السؤال</th><th>إجابتك</th><th>النتيجة</th></tr>";
+  quizData.forEach((q, i) => {
+    const answer = answers[i] || "لم تُجب";
+    const isCorrect = answer === q.correct;
+    table += `<tr>
+      <td>${i + 1}. ${q.word}</td>
+      <td>${answer}</td>
+      <td style="color:${isCorrect ? 'green' : 'red'}">
+        ${isCorrect ? "✅ صحيحة" : `❌ خاطئة (الصحيح: ${q.correct})`}
+      </td>
+    </tr>`;
+  });
+  table += "</table>";
+  summary.innerHTML = table;
+  document.getElementById("resultBox").classList.remove("hidden");
+}
+
+function prevFromReview() {
+  document.getElementById("submitBtn").classList.add("hidden");
+  fromReview = false;
+  document.getElementById("reviewSlide").classList.add("hidden");
+  document.getElementById("quizBox").classList.remove("hidden");
+  document.getElementById("homeButtonBox").style.display = "none";
+  current = quizData.length - 1;
+  loadQuestion();
+}
+
+
+
+
+
+
+
+function reviewBeforeSubmit() {
+  document.getElementById("submitBtn").classList.remove("hidden");
+    fromReview = false;
+  document.getElementById("quizBox").classList.add("hidden");
+  document.getElementById("reviewSlide").classList.add("hidden");
+  document.getElementById("reviewSlide").classList.remove("hidden");
+
+  const oldTable = document.querySelector("#reviewSlide table");
+  if (oldTable) oldTable.remove();
+
+  let table = "<table><tr><th>السؤال</th><th>إجابتك</th><th>الانتقال</th></tr>";
+  quizData.forEach((q, i) => {
+    const fullQuestion = `ما الترجمة الصحيحة لكلمة: "${q.word}"؟`;
+    const answer = answers[i];
+    const answerText = answer
+      ? `<strong>${answer}</strong>`
+      : '<strong><span style="color:red;">لم تُجب</span></strong>';
+    const goBtn = `<button onclick='goToQuestion(${i})'>⬅️ الذهاب للسؤال</button>`;
+    table += `<tr><td>${i + 1}. ${fullQuestion}</td><td>${answerText}</td><td>${goBtn}</td></tr>`;
+  });
+  table += "</table>";
+
+  document.getElementById("reviewSlide").insertAdjacentHTML("beforeend", table);
+}
+
+function goToQuestion(index) {
+  document.getElementById("submitBtn").classList.add("hidden");
+  current = index;
+  document.getElementById("reviewSlide").classList.add("hidden");
+  document.getElementById("quizBox").classList.remove("hidden");
+  document.getElementById("homeButtonBox").style.display = "none";
+  fromReview = true;
+  loadQuestion();
+}
+
+</script>
+<script>  
+function generateCertificate() {
+  const certificateWindow = window.open("", "_blank");
+  certificateWindow.document.write(`
+    <html lang="ar">
+    <head>
+      <meta charset="UTF-8">
+      <title>شهادة نجاح</title>
+      <style>
+        @media print {
+          @page {
+            size: A4 landscape;
+            margin: 0;
+          }
+          body {
+            margin: 0;
+          }
+        }
+        body {
+          font-family: 'Arial', sans-serif;
+          direction: rtl;
+          text-align: center;
+          background-color: #f0f8e9;
+          padding: 80px;
+        }
+        .certificate-box {
+          background-color: #ffffff;
+          border: 10px solid #4caf50;
+          padding: 40px;
+          border-radius: 20px;
+          width: 100%;
+          box-sizing: border-box;
+          box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+          color: #2e7d32;
+          font-size: 48px;
+          margin-bottom: 20px;
+        }
+        h2 {
+          color: #1976d2;
+          font-size: 36px;
+          margin: 20px 0;
+        }
+        p {
+          font-size: 24px;
+          margin: 10px 0;
+        }
+        .footer {
+          margin-top: 60px;
+          font-size: 18px;
+          color: #555;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="certificate-box">
+        <h1>🎓شهادة نجاح🎓</h1>
+        <p>تشهد بوابة تعلم اللغة الإنجليزية أن الطالب/ ـه</p>
+        <h2>${student}</h2>
+        <p>قد اجتاز/ت اختبار الترجمة القرائي لمجموعة الأفعال السادسة بتقدير ممتاز</p>
+        <p>📘ونتمى له/ ـها دوام التوفيق والنجاح📘 </p>
+        <p class="footer" style="font-weight:bold;">مدير بوابة تعلم اللغة الإنجليزية</p>
+        <p style="font-weight:bold;">د. محمد العوفي</p>
+        <p class="footer">تاريخ الشهادة: ${(new Date()).toLocaleDateString('en-GB')}</p>
+      </div>
+    </body>
+    </html>
+  `);
+  certificateWindow.document.close();
+  certificateWindow.print();
+}
+
+
+
+
+
+function reviewBeforeSubmit() {
+  document.getElementById("submitBtn").classList.remove("hidden");
+    fromReview = false;
+  document.getElementById("quizBox").classList.add("hidden");
+  document.getElementById("reviewSlide").classList.add("hidden");
+  document.getElementById("reviewSlide").classList.remove("hidden");
+
+  const oldTable = document.querySelector("#reviewSlide table");
+  if (oldTable) oldTable.remove();
+
+  let table = "<table><tr><th>السؤال</th><th>إجابتك</th><th>الانتقال</th></tr>";
+  quizData.forEach((q, i) => {
+    const fullQuestion = `ما الترجمة الصحيحة لكلمة: "${q.word}"؟`;
+    const answer = answers[i];
+    const answerText = answer
+      ? `<strong>${answer}</strong>`
+      : '<strong><span style="color:red;">لم تُجب</span></strong>';
+    const goBtn = `<button onclick='goToQuestion(${i})'>⬅️ الذهاب للسؤال</button>`;
+    table += `<tr><td>${i + 1}. ${fullQuestion}</td><td>${answerText}</td><td>${goBtn}</td></tr>`;
+  });
+  table += "</table>";
+
+  document.getElementById("reviewSlide").insertAdjacentHTML("beforeend", table);
+}
+
+function goToQuestion(index) {
+  document.getElementById("submitBtn").classList.add("hidden");
+  current = index;
+  document.getElementById("reviewSlide").classList.add("hidden");
+  document.getElementById("quizBox").classList.remove("hidden");
+  document.getElementById("homeButtonBox").style.display = "none";
+  fromReview = true;
+  loadQuestion();
+}
+
+</script>
+</body>
+</html>
